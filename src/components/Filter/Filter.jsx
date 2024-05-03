@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Dropdown from "../Dropdown/Dropdown";
+import "./Filter.css";
 
 const Filter = () => {
   const filterData = [
@@ -39,14 +40,14 @@ const Filter = () => {
   const [filters, setFilters] = useState({});
 
   const handleFilterChange = (event, filterName) => {
-    setFilters(prevFilters => ({
+    setFilters((prevFilters) => ({
       ...prevFilters,
       [filterName]: event.target.value,
     }));
   };
 
   return (
-    <div>
+    <div className="filter-container">
       {filterData.map((filter) => (
         <div key={filter.name}>
           <Dropdown
@@ -60,8 +61,19 @@ const Filter = () => {
           />
         </div>
       ))}
+      <input
+        className="searchbar"
+        type="text"
+        placeholder="Search Company Name"
+      ></input>
     </div>
   );
 };
 
 export default Filter;
+
+/*  {option.category ? <div> 
+                <span>{option.category}</span>
+                {suboptions.map((suboption) => (
+                  <div key={option.value}>{option.label}</div>
+                ))} */
