@@ -1,0 +1,15 @@
+.container{
+    border-radius: 20px;
+    background-color: #d9fed3;
+    padding: 6px 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
+    font-weight: 400;
+    font-size: 14px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.subText{
+    font-weight: 600;
+    color: black;
+}
