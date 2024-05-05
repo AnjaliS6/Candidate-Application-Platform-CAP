@@ -1,16 +1,15 @@
-import React from "react";
-import './Badge.css';
+import "./Badge.css";
 
- const Badge = () => {
+const Badge = () => {
   return (
     <div className="container">
       We, at Weekday, are creating a go-to hub for uncovering the real issues
-      candidates should be aware of before joining a company. 
-      <a href="" target="_blank">
+      candidates should be aware of before joining a company.
+      <a href="#">
         <span className="subText">&nbsp;Access 150+ company reviews here</span>
       </a>
     </div>
   );
-}
+};
 
-export default Badge
+export default Badge;

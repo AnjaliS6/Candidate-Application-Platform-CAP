@@ -1,8 +1,7 @@
+import { useState, useEffect } from "react";
 import Filter from "./components/Filter/Filter.jsx";
 import Badge from "./components/Badge/Badge.jsx";
 import "./App.css";
-import { useState, useEffect } from "react";
-import Card from "./components/Card/Card.jsx";
 
 function App() {
   const [data, setData] = useState([]);
@@ -42,7 +41,6 @@ function App() {
     <div>
       <Badge />
       <Filter data={data} />
-      <Card data={data} />
     </div>
   );
 }

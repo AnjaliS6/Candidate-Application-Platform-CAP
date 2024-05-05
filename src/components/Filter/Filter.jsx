@@ -1,34 +1,40 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from "../Dropdown/Dropdown";
+import Card from "../Card/Card";
 import "./Filter.css";
 
 const Filter = ({ data }) => {
-
   const [filters, setFilters] = useState({});
   const [filteredData, setFilteredData] = useState([]);
-  const [experience, setExperience] = useState(null);
-   const keys = ["jobRole", "location", "minJdSalary"];
+  const [experience, setExperience] = useState(0);
+  const [search, setSearch] = useState("");
+  const keys = [
+    {
+      label: "Roles",
+      code: "jobRole",
+    },
+    {
+      label: "Location",
+      code: "location",
+    },
+    { label: "Minimum Base Pay Salary", code: "minJdSalary" },
+  ];
 
   useEffect(() => {
     setFilteredData([...data]);
   }, [data]);
 
-  const maxOfMinExp = () => {
-    let max = Number.MIN_VALUE;
+  const minExpArray = () => {
+    let maxVal = Number.MIN_VALUE;
     for (const ele of data) {
-      if (ele?.minExp > max) {
-        max = ele?.minExp;
+      if (ele?.minExp > maxVal) {
+        maxVal = ele?.minExp;
       }
     }
-    return max;
-  };
 
-  const fillArray = () => {
-    const maxVal = maxOfMinExp();
-    const filledArray = Array.from({ length: maxVal + 1 }, (_, index) => index);
+    const filledArray = Array.from({ length: maxVal }, (_, index) => index + 1);
     return filledArray;
-};
+  };
 
   const handleFilterChange = (key, value) => {
     setFilters((prevFilters) => ({
@@ -44,67 +50,64 @@ const Filter = ({ data }) => {
           (key) => item[key] === filters[key]
         );
         const experienceMatches = !experience || item?.minExp === experience;
-
-        return filterMatches && experienceMatches;
+        const searchMatches =
+          !item?.companyName ||
+          item?.companyName?.toLowerCase()?.includes(search?.toLowerCase());
+        return filterMatches && experienceMatches && searchMatches;
       })
     );
-  }, [data, filters, experience]);
+  }, [data, filters, experience, search]);
 
-  // const separatedValues = keys.map(key => {
-  //     return {
-  //         label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label
-  //         options: [...new Set(apiRes.map(obj => obj[key]))] // Use Set to remove duplicates
-  //     };
-  // });
   return (
     <>
       <div className="filter-container">
-        {keys.map((key) => (
-          <div key={key}>
+        {keys?.map((key, idx) => (
+          <div key={idx}>
             <Dropdown
-              placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
-              value={filters[key]}
-              options={[...new Set(data?.map((item) => item[key]))]?.map(
+              placeholder={key?.label}
+              value={filters[key?.code]}
+              options={[...new Set(data?.map((item) => item[key?.code]))]?.map(
                 (value) => ({
                   value: value,
                   label: value,
                 })
               )}
-              onChange={(e) => handleFilterChange(key, e.target.value)}
+              onChange={(e) => handleFilterChange(key?.code, e?.target?.value)}
             />
           </div>
         ))}
         <Dropdown
-          placeholder={"Experience"}
+          placeholder="Experience"
           value={experience}
-          options={fillArray()}
-          onChange={setExperience}
+          options={minExpArray()}
+          setExperience={setExperience}
           isExperience
         />
-        <ul>
-          {filteredData?.map((item) => (
-            <li key={item.jdUid}>
-              <p>Company Name: {item.companyName}</p>
-              <p>Job Role: {item.jobRole}</p>
-              <p>Location: {item.location}</p>
-              <p>Minimum Experience: {item?.minExp ? item?.minExp : 0}</p>
-              <p>
-                Minimum Salary:{" "}
-                {item?.minJdSalary ? item?.minJdSalary + "Lac" : "NA"}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <input
+          autoFocus
+          type="search"
+          placeholder="Search Company Name"
+          className="searchbox"
+          value={search}
+          onChange={(e) => setSearch(e?.target?.value)}
+        />
+        {Object?.keys(filters).length || search || experience ? (
+          <button
+            onClick={() => {
+              setFilters({});
+              setExperience(0);
+              setSearch("");
+            }}
+            className="clear-btn"
+          >
+            Clear filters <span className="cross-icon">x</span>
+          </button>
+        ) : null}
       </div>
-      <input
-        className="searchbar"
-        type="text"
-        placeholder="Search Company Name"
-      ></input>
+
+      <Card data={filteredData} />
     </>
   );
 };
 
 export default Filter;
-
-

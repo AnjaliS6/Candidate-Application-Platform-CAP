@@ -1,41 +1,60 @@
-import React, { useState, useEffect } from "react";
+import HourGlass from "../../assets/hourglass.svg";
+import CheckMark from "../../assets/checkMark.svg";
+import LightningBolt from "../../assets/lightning.svg";
 import "./Card.css";
 
 const Card = ({ data }) => {
-  const [cards, setCards] = useState([{}]);
-
-  console.log(data);
-
-  useEffect(() => {
-    setCards([...data]);
-  }, [data]);
-
   return (
     <div className="cardMain-container">
-      <div>
-        {cards.map((card) => (
-          <div className="Card-container">
-            <div className="subClass">
-              <img className="logo" src={card.logoUrl} alt="logo" />
+      {data?.map((card, idx) => (
+        <div className="card-container" key={idx}>
+          <div className="card-badge">
+            <img src={HourGlass} alt="hourglass-icon" />
+            <span>Posted 13 days ago</span>
+          </div>
+          <div className="card-header">
+            <img className="logo" src={card?.logoUrl} alt="logo" />
+            <div className="card-header-content">
+              <span className="card-company-name">{card?.companyName}</span>
+              <span className="card-job-roles">{card?.jobRole}</span>
+              <span className="card-location">{card?.location}</span>
+            </div>
+          </div>
+
+          <div>
+            <div className="salary-container">
               <span>
-                <p>{card.companyName}</p>
-                <p>{card.jobRole}</p>
-                <p>{card.location}</p>
+                Estimated Salary: {card?.salaryCurrencyCode}
+                {card?.minJdSalary ? card?.minJdSalary : 0} -{" "}
+                {card?.maxJdSalary}
+              </span>
+              <img src={CheckMark} alt="check-icon" />
+            </div>
+            <span>About Company:</span>
+            <div className="about-us">About us</div>
+            <span>{card?.jobDetailsFromCompany}</span>
+            <div className="experience-container">
+              <span style={{ color: "gray" }}>Minimum Experience</span>
+              <span style={{ color: "#000000a3" }}>
+                {card?.minExp ? card?.minExp : 0} years
               </span>
             </div>
-
-            <p>
-              Estimated Salary:{card.salaryCurrencyCode}
-              {card.minJdSalary}-{card.maxJdSalary}
-            </p>
-            <p>About Company:</p>
-            <p>About us</p>
-            <p>{card.jobDetailsFromCompany}</p>
-            <p>Minimum Experience</p>
-            <p>{card.minExp} Years</p>
           </div>
-        ))}
-      </div>
+          <div>
+            <a
+              className="easy-apply-btn"
+              href="https://weekday.works"
+              target="_blank"
+            >
+              <img src={LightningBolt} alt="lightning-icon" />
+              Easy Apply
+            </a>
+            <a className="unlock-referral-btn" href="#">
+              Unlock referral asks
+            </a>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
