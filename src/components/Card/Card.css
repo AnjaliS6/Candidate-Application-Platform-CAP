@@ -1,0 +1,22 @@
+.Card-container{
+    border-radius: 20px;
+    border: 1px solid black;
+    flex-direction: column;
+    width: 300px;
+ padding: 8px 16px;
+    margin: 10px;
+}
+
+.cardMain-container{
+    display: flex;
+}
+
+.logo{
+    width: 25px;
+    height: 40px
+}
+
+.subClass{
+    display:flex;
+    flex-direction: row;
+}
