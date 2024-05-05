@@ -20,32 +20,6 @@ Key Features:
 8. Personalized Recommendations: CAP offers personalized job recommendations based on a candidate's profile, preferences, and past application history. By analyzing a candidate's interests and qualifications, CAP can suggest relevant job opportunities that match their skills and experience.
 9. Responsive Design: CAP is optimized for use on various devices, including desktops, laptops, tablets, and smartphones. The platform's responsive design ensures that candidates can access and use CAP seamlessly across different screen sizes and devices.
 
-
-Certainly! Here's a README file for your CAP (Candidate Application Platform) project:
-
-markdown
-Copy code
-# CAP - Candidate Application Platform
-
-CAP is an online Candidate Application Platform where candidates can filter jobs based on multiple criteria such as Minimum Experience, Company Name, Location, Number of Employees, etc., and easily apply for the jobs.
-
-## Table of Contents
-
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Features
-
-- **Job Filtering**: Candidates can filter job listings based on various criteria such as Minimum Experience, Company Name, Location, Number of Employees, etc.
-- **Job Application**: Candidates can easily apply for jobs directly through the platform.
-- **User Authentication**: Secure user authentication system to allow candidates to create accounts and manage their applications.
-- **Job Recommendations**: Personalized job recommendations based on a candidate's profile and past applications.
-- **Responsive Design**: The platform is optimized for use on various devices, including desktops, tablets, and smartphones.
-
 ## Technologies Used
 - React.js
 - CSS
